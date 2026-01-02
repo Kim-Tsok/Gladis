@@ -1,15 +1,19 @@
+import random
+
 weapon = {
-    "total_damage": 1,
-    "base_damage": 2,
-    "has_weapon": True,
-    "current_weapon": "Dagger",
-    "weapon_damage": 9,
+    "name": "Excalibur",
+    "base_damage": 11,
+    "total_damage": 0,
+    "modifiers": {
+        "goblin": 1.3,
+        "ogre": 0.8
+    },
+    "flavor_lines": [
+        "✨ Excalibur hums with ancient power",
+        "⚔️ The blade gleams as it strikes"
+    ]
 }
 
 def calculate_weapon(weapon):
-    pieces = [
-        "base_damage",
-        "weapon_damage"
-    ]
-
-    weapon["total_damage"] = sum(weapon.get(piece, 0) for piece in pieces)
+    roll = random.randint(1, 6)
+    weapon["total_damage"] = weapon["base_damage"] + roll
