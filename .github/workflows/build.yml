@@ -1,6 +1,7 @@
 name: Build Executables
 
-on: [push] # This triggers the build every time you push code
+on:
+  push:
 
 jobs:
   build:
@@ -10,25 +11,57 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-    - name: Install dependencies
-      run: |
-        pip install pyinstaller
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      shell: bash
+      - name: Install dependencies
+        shell: bash
+        run: |
+          pip install pyinstaller
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: Build with PyInstaller
-      run: pyinstaller --onefile gladys.py
+      - name: Build with PyInstaller
+        shell: bash
+        run: |
+          pyinstaller --onefile gladys.py
 
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: executable-${{ matrix.os }}
-        path: dist/
+      # -------- LINUX --------
+      - name: Create Linux desktop launcher
+        if: matrix.os == 'ubuntu-latest'
+        shell: bash
+        run: |
+          cat <<EOF > gladys.desktop
+          [Desktop Entry]
+          Name=Gladys
+          Comment=Terminal Game
+          Exec=gladys
+          Terminal=true
+          Type=Application
+          Categories=Game;
+          EOF
+          chmod +x gladys.desktop
+
+      # -------- MACOS --------
+      - name: Create macOS terminal launcher
+        if: matrix.os == 'macos-latest'
+        shell: bash
+        run: |
+          cat <<'EOF' > run-gladys.command
+          #!/bin/bash
+          "$(dirname "$0")/gladys"
+          EOF
+          chmod +x run-gladys.command
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: gladys-${{ matrix.os }}
+          path: |
+            dist/gladys*
+            *.desktop
+            *.command
