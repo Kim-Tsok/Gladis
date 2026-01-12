@@ -1,11 +1,13 @@
 enemies = {
-    "goblin": {
-        "name": "Diddy Kong",
+    "knight01": {
+        "name": "James",
         "health": 35,
         "attack": 10,
         "dialogue": [
-            "Come over here boy, i've got some oil for you!",
-            "Hehehe… soft eyes 😈",
+            "- Okay, you're doing well!",
+            "- I thought you were rusty but it seems like you still got it",
+            "- Ohh nice",
+             "You're cooking bruh"
         ],
         "special_moves": [
             {

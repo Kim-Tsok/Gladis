@@ -1,0 +1,13 @@
+def instructions():
+    print("")
+    print("📕 Instructions: ")
+    input("This is a text based choose your adventure game made with python. You press the ENTER key to continue after reading a line of text. ")
+    input("Except when prompted you don't need to answer question cause they won't matter. he only time you should use anything beside the enter key is when you see something like this '(y/n)'. ")
+    input("Besides prompts, there is also combat. You will be informed before entering a combat situation ")
+    input("When in a combat situation, you can use (a) to ATTACK, (d) to DEFEND and (r) to RUN in most battles. ")
+    input("Some battles may play a little different. No matter the change, it will be relayed to you. ")
+    input("Most choices you can make after a question will be shown after the question in a bracket like this.(y/n) ")
+    input("Enjoy Gladys. ")
+    print("")
+    print("=" * 10)
+    print(" ")

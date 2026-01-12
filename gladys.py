@@ -6,6 +6,7 @@ def main():
     from weapons import weapons
     from armour import armour
     from enemies import enemies
+    from instructions import instructions
 
     player = {
         "health": 100,
@@ -14,9 +15,13 @@ def main():
         "status": None
     }
 
+    # Game Start
     input("Press Enter to start the game...")
-    print(" ")
 
+    # Instructions
+    instructions()
+
+    # Prologue
     input("Unknown: What is your motivation for all of this, why do you do this? ")
     input("Make it easier on yourself, just give up. ")
     input("Give up on this stupid dream of trying to beat me. ")
@@ -34,10 +39,11 @@ def main():
 
     weapon = weapons["excalibur"].copy()
 
-    fight(player, weapon, armour, enemies["goblin"])
+    fight(player, weapon, armour, enemies["knight01"])
 
-    input("You have defeated the goblin! Now you must face the ogre! ")
-    fight(player, weapon, armour, enemies["ogre"])
+    input(" ")
+    input("Didn't that feel rejuvinating. Doesn't it feel nice to stretch a bit")
+
 
 
 if __name__ == "__main__":
